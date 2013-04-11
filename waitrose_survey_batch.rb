@@ -87,7 +87,7 @@ b.a(:href, "javascript:next();").click#next
 #b.input(:class => "verticalRadioOdd", :index => last).click
 #b.inputs.find_all {|input| input.text == "verticalRadioOdd"}.last.click 
 #b.div(:text => 'div',:index =>Last).click
-      iLastInputIndex =  browser.inputs.length
+      iLastInputIndex =  browser.inputs(:class, "verticalRadioOdd").length
       browser.input(:index,  iLastInputIndex).click
 			b.a(:href, "javascript:next();").click #next
 
