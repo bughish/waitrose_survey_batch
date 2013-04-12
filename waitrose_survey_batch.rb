@@ -22,6 +22,13 @@ for j in 0..k do
 @receipt_p2 = h[j][1]
 @receipt_p3 = h[j][2]
 @receipt_p4 = h[j][3]
+
+@cycle = j+1
+@cycles = k+1
+
+puts ":: Cycle "+@cycle.to_s+" of "+@cycles.to_s
+puts "Receipt ID "+@cycle.to_s+" is: "+h[j].to_s
+
 b.goto "http://www.waitrosecares.com/"
 b.a(:href, "custsurvey.jsp").click
 b.text_field(:id, "txt_field1").set(@receipt_p1)
@@ -30,19 +37,16 @@ b.text_field(:id, "txt_field3").set(@receipt_p3)
 b.text_field(:id, "txt_field4").set(@receipt_p4)
 b.div(:id, "apDiv1").click
 b.a(:href, "javascript:next();").click
-#1
+
 sleep 1 until b.img(:src, "images/calendar.gif").exists?
-puts b.span(:class, "surveyInstruction").text.to_s
-puts b.td(:class, "verticalquestion").text.to_s
+puts "#1 "+b.span(:class, "surveyInstruction").text.to_s
 b.img(:src, "images/calendar.gif").click #calendar
 b.a(:class, "current-day-style selected-day-style").click
 b.td(:class, "verticalRowEven").click
 b.a(:href, "javascript:next();").click #next
 
-#2
 sleep 1 until b.td(:class => "radioOdd", :index => 4).exists?
-puts b.span(:class, "surveyInstruction").text.to_s
-puts b.td(:class, "verticalquestion").text.to_s
+puts "#2 "+b.span(:class, "surveyInstruction").text.to_s
 if b.text.include? "shopping"
 b.td(:class => "radioOdd", :index => 4).click 
 b.td(:class => "radioEven", :index => 4).click
@@ -55,58 +59,47 @@ b.td(:class => "radioOdd", :index => 17).click
 end
 b.a(:href, "javascript:next();").click #next
 
-#3
 sleep 1 until b.td(:class => "radioOdd").exists?
-puts b.span(:class, "surveyInstruction").text.to_s
-puts b.td(:class, "verticalquestion").text.to_s
+puts "#3 "+b.span(:class, "surveyInstruction").text.to_s
 b.td(:class => "radioOdd").click
 b.a(:href, "javascript:next();").click #next
-#b.text_field(:name, "PARTNER_WOW").set("Everything was special")
-#b.text_field(:name, "PARTNER_NAME_DETAIL").set("Can't recall")
 
-#4
-puts b.span(:class, "surveyInstruction").text.to_s
-puts b.td(:class, "verticalquestion").text.to_s
+
+puts "#4 "+b.span(:class, "surveyInstruction").text.to_s
+#uncomment to add some text feedback in set brackets
+#b.text_field(:name, "PARTNER_WOW").set("Tell them a bit more about what partners did that it was special..")
+#b.text_field(:name, "PARTNER_NAME_DETAIL").set("Partners name")
 b.a(:href, "javascript:next();").click #next
 
-#5
-puts b.span(:class, "surveyInstruction").text.to_s
-puts b.td(:class, "verticalquestion").text.to_s
+puts "#5 "+b.span(:class, "surveyInstruction").text.to_s
+#uncomment to add some text feedback in set brackets
+#b.text_field(:name, "OV_SAT_POS").set("Reasons that made my experience memorable")
 b.a(:href, "javascript:next();").click #next
 
-#6
 sleep 1 until b.td(:class => "verticalRowEven").exists?
-puts b.span(:class, "surveyInstruction").text.to_s
-puts b.td(:class, "verticalquestion").text.to_s
+puts "#6 "+b.span(:class, "surveyInstruction").text.to_s
 b.td(:class => "verticalRowEven").click
-b.a(:href, "javascript:next();").click#next
-
-  		#7
-			sleep 1 until b.input(:class => "verticalRadioOdd", :index => 1).exists?
-			puts b.span(:class, "surveyInstruction").text.to_s
-#b.input(:class => "verticalRadioOdd", :index => last).click
-#b.inputs.find_all {|input| input.text == "verticalRadioOdd"}.last.click 
-#b.div(:text => 'div',:index =>Last).click
-      iLastInputIndex =  browser.inputs(:class, "verticalRadioOdd").length
-      browser.input(:index,  iLastInputIndex).click
-			b.a(:href, "javascript:next();").click #next
-
-#8
-sleep 1 until b.td(:class => "verticalRowOdd").exists?
-puts b.span(:class, "surveyInstruction").text.to_s
-b.td(:class => "verticalRowOdd").click
-b.input(:class => "verticalRadioOdd", :index => 1).click
 b.a(:href, "javascript:next();").click #next
 
-#9
+sleep 1 until b.input(:class => "verticalRadioOdd", :index => 1).exists?
+puts "#7 "+b.span(:class, "surveyInstruction").text.to_s
+g =  b.inputs(:class => "verticalRadioOdd").length
+b.input(:class => "verticalRadioOdd", :index =>  g-1).click
+b.a(:href, "javascript:next();").click #next
+
+sleep 1 until b.td(:class => "verticalRowOdd").exists?
+puts "#8 "+b.span(:class, "surveyInstruction").text.to_s
+g =  b.inputs(:class => "verticalRadioOdd").length
+b.input(:class => "verticalRadioOdd", :index =>  g-1).click
+b.a(:href, "javascript:next();").click #next
+
 sleep 1 until b.td(:class => "radioOdd").exists?
-puts b.span(:class, "surveyInstruction").text.to_s
+puts "#9 "+b.span(:class, "surveyInstruction").text.to_s
 b.td(:class => "radioOdd").click
 b.a(:href, "javascript:next();").click #next
 
-#9
 sleep 1 until b.td(:class => "radioOdd").exists?
-puts b.span(:class, "surveyInstruction").text.to_s
+puts "#10 "+b.span(:class, "surveyInstruction").text.to_s
 
 if b.text.include? "shelves"
 b.td(:class => "radioOdd").click
@@ -120,44 +113,38 @@ b.td(:class => "radioEven").click
 b.td(:class => "radioOdd", :index => 6).click
 end
 b.a(:href, "javascript:next();").click #next
+ 
+sleep 1 until b.td(:class => "radioOdd").exists?
+puts "#11 "+b.span(:class, "surveyInstruction").text.to_s
+b.td(:class => "radioOdd", :index => 4).click
+b.td(:class => "radioEven", :index => 4).click
+b.td(:class => "radioOdd", :index => 9).click
+b.a(:href, "javascript:next();").click #next
 
-#10 
 sleep 1 until b.td(:class => "radioOdd").exists?
-puts b.span(:class, "surveyInstruction").text.to_s
-b.td(:class => "radioOdd", :index => 4).click
-b.td(:class => "radioEven", :index => 4).click
-b.td(:class => "radioOdd", :index => 9).click
-b.td(:class => "radioEven", :index => 9).click
-b.td(:class => "radioOdd", :index => 14).click
-	
-b.a(:href, "javascript:next();").click #next
-sleep 1 until b.td(:class => "radioOdd").exists?
-b.td(:class => "radioOdd").click
-b.td(:class => "radioEven").click
-b.td(:class => "radioOdd", :index => 3).click
-b.td(:class => "radioEven", :index => 3).click
-b.a(:href, "javascript:next();").click #next
-sleep 1 until b.td(:class => "radioOdd", :index => 4).exists?
-b.td(:class => "radioOdd", :index => 4).click
-b.td(:class => "radioEven", :index => 4).click
-b.td(:class => "radioOdd", :index => 9).click
-b.a(:href, "javascript:next();").click #next
-sleep 1 until b.td(:class => "radioOdd", :index => 4).exists?
+puts "#12 "+b.span(:class, "surveyInstruction").text.split(/\n/)[0]
 b.td(:class => "radioOdd", :index => 4).click
 b.td(:class => "radioEven", :index => 4).click
 b.td(:class => "radioOdd", :index => 9).click
 b.td(:class => "radioEven", :index => 9).click
 b.td(:class => "radioOdd", :index => 12).click
 b.a(:href, "javascript:next();").click #next
-sleep 1 until b.td(:class => "verticalRowOdd", :index => 2).exists?
+
+sleep 1 until b.td(:class, "verticalRowOdd").exists?
+puts "#13 "+b.span(:class, "surveyInstruction").text.split(/\n/)[0]
 b.td(:class => "verticalRowOdd", :index => 2).click
 b.a(:href, "javascript:next();").click #next
-sleep 1 until b.td(:class => "radioOdd", :index => 2).exists?
-b.td(:class => "radioOdd", :index => 2).click
-b.td(:class => "radioEven", :index => 2).click
-b.td(:class => "verticalRowEven", :index => 8).click
+
+sleep 1 until b.td(:class => "radioOdd").exists?
+puts "#14 "+b.span(:class, "surveyInstruction").text.to_s
+b.td(:class => "radioOdd").click
+b.td(:class => "radioEven", :index => 3).click #AGE!!!
+g =  b.tds(:class => "verticalRowEven").length
+b.td(:class => "verticalRowEven", :index => g-2).click
 b.a(:href, "javascript:next();").click #next
+
 sleep 1 until b.input(:name, "FIRST_NAME").exists?
+puts "#15 "+b.span(:class, "surveyInstruction").text.to_s
 b.input(:name, "FIRST_NAME").send_keys @name.to_s
 b.input(:name, "LAST_NAME").send_keys @lastname.to_s
 b.input(:name, "ADDRESS_1").send_keys @street.to_s
@@ -170,15 +157,20 @@ b.td(:class => "radioOdd", :index => 1).click
 b.td(:class => "radioEven", :index => 7).click
 b.td(:class => "radioOdd", :index => 3).click
 b.a(:href, "javascript:next();").click #next
+
 sleep 1 until b.td(:class => "radioOdd", :index => 1).exists?
+puts "#16 "+b.span(:class, "surveyInstruction").text.to_s
 b.td(:class => "radioOdd", :index => 1).click
 b.a(:href, "javascript:next();").click #next
+
 #sleep 1 until b.td(:class => "radioOdd", :index => 4).exists?
+#puts "#17 "+b.span(:class, "surveyInstruction").text.to_s
 #b.td(:class => "radioOdd", :index => 4).click
 #b.a(:href, "javascript:finish();").click #last
+
+#18 Finish
 #sleep 1 until b.img(:src, "images/button_no.jpg").exists?
 #b.img(:src, "images/button_no.jpg").click #no
-#sleep 2
 #b.img(:src, "images/button_yes.jpg").click #yes
 end
 b.close
