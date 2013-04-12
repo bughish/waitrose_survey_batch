@@ -1,6 +1,8 @@
 waitrose_survey_batch
 =====================
 
+Pre-requisites: make sure you have Ruby 1.9.3 installed and watir-webdriver gem.
+
 #Instructions
 1. Fork repo and copy to local.
 2. Add receipts to waitrose_receipts.txt, each from new line.
