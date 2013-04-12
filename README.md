@@ -1,6 +1,9 @@
 waitrose_survey_batch
 =====================
 
+www.waitrosecares.com - survey helper, having array of batch receipts and userdata as input
+Will complete number of survey cycles for the user based on the number of receipts in array.
+
 Pre-requisites: make sure you have Ruby 1.9.3 installed and watir-webdriver gem.
 
 #Instructions
