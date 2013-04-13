@@ -1,0 +1,6 @@
+[0412/152525:INFO:chromedriver_server.cc(76)] Handling request: /session {"desiredCapabilities":{"browserName":"chrome","version":"","platform":"ANY","javascriptEnabled":true,"cssSelectorsEnabled":true,"takesScreenshot":false,"nativeEvents":false,"rotatable":false,"chromeOptions":{"detach":true},"chrome.detach":true}}
+[0412/152525:INFO:chromedriver_server.cc(81)] Done handling request: 200 {"sessionId":"","status":13,"value":{"message":"unknown error: unrecognized chrome option: detach\n  (Driver info: chromedriver=0.7,platform=Windows NT 6.1 SP1 x86_64)"}}
+[0412/152525:INFO:chromedriver_server.cc(76)] Handling request: /session/url 
+[0412/152525:INFO:chromedriver_server.cc(81)] Done handling request: 200 {"sessionId":"url","status":100,"value":{"message":"no such session: url\n  (Driver info: chromedriver=0.7,platform=Windows NT 6.1 SP1 x86_64)"}}
+[0412/152525:INFO:chromedriver_server.cc(76)] Handling request: /session/title 
+[0412/152525:INFO:chromedriver_server.cc(81)] Done handling request: 200 {"sessionId":"title","status":100,"value":{"message":"no such session: title\n  (Driver info: chromedriver=0.7,platform=Windows NT 6.1 SP1 x86_64)"}}

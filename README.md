@@ -2,6 +2,8 @@ waitrose_survey_batch
 =====================
 Or BebySteps into Watir-WebDrive for dummies in 42 simple easy steps!
 
+Firefox Ver 20.X is not curentlly supported. Use 19.X instead - has more flavour...
+
 www.waitrosecares.com - survey helper, having array of batch receipts and userdata as input
 Will complete number of survey cycles for the user based on the number of receipts in array.
 
